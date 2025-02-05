@@ -1,0 +1,40 @@
+{
+    "Search": [
+        {
+            "Title": "Test Movie",
+            "Year": "2025",
+            "imdbID": "tt1234567",
+            "Poster": "http://example.com/poster-1.jpg",
+            "Type": "movie"
+        },
+        {
+            "Title": "Another Test Movie",
+            "Year": "2024",
+            "imdbID": "tt7654321",
+            "Poster": "http://example.com/poster-2.jpg",
+            "Type": "movie"
+        },
+        {
+            "Title": "Test Show",
+            "Year": "2023",
+            "imdbID": "tt2468101",
+            "Poster": "http://example.com/poster-3.jpg",
+            "Type": "episode"
+        },
+        {
+            "Title": "Test Series",
+            "Year": "2022",
+            "imdbID": "tt1357911",
+            "Poster": "http://example.com/poster-4.jpg",
+            "Type": "series"
+        },
+        {
+            "Title": "Yet Another Test Movie",
+            "Year": "2021",
+            "imdbID": "tt1010101",
+            "Poster": "http://example.com/poster-5.jpg",
+            "Type": "movie"
+        }
+    ],
+    "totalResults": "5"
+}

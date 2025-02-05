@@ -1,0 +1,26 @@
+{
+    "Search": [
+        {
+            "Title": "Test Movie",
+            "Year": "2025",
+            "imdbID": "tt1234567",
+            "Poster": "http://example.com/poster-1.jpg",
+            "Type": "movie"
+        },
+        {
+            "Title": "Test Series",
+            "Year": "2022",
+            "imdbID": "tt1357911",
+            "Poster": "http://example.com/poster-4.jpg",
+            "Type": "series"
+        },
+        {
+            "Title": "Test Show",
+            "Year": "2023",
+            "imdbID": "tt2468101",
+            "Poster": "http://example.com/poster-3.jpg",
+            "Type": "episode"
+        }
+    ],
+    "totalResults": "5"
+}

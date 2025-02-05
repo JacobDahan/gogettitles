@@ -12,7 +12,7 @@ A minimal library for implementing auto-complete of TV and movie title search.
 
 🔜 Implements multiple movie database clients and provides an extensible interface for bespoke implementations.
 
-🔜 Thoroughly tested.
+✅ Thoroughly tested.
 
 ## Getting Started
 
