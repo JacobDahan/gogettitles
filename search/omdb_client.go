@@ -10,12 +10,19 @@ import (
 	"strconv"
 )
 
-const (
-	baseURL         = "https://www.omdbapi.com"
-	apiKeyParameter = "apiKey"
-	searchParameter = "s"
-	pageParameter   = "page"
-)
+type OmdbConstants struct {
+	baseURL         string
+	apiKeyParameter string
+	searchParameter string
+	pageParameter   string
+}
+
+var omdbConstants = OmdbConstants{
+	baseURL:         "https://www.omdbapi.com",
+	apiKeyParameter: "apiKey",
+	searchParameter: "s",
+	pageParameter:   "page",
+}
 
 // An OMDB-based Searcher implementation.
 type OmdbSearcher struct {
@@ -88,15 +95,15 @@ func (os *OmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 	}
 
 	// Build the URL for the search request
-	endpoint, err := url.Parse(baseURL)
+	endpoint, err := url.Parse(omdbConstants.baseURL)
 	if err != nil {
 		return false, err
 	}
 
 	params := url.Values{}
-	params.Add(apiKeyParameter, os.apiKey)
-	params.Add(searchParameter, query)
-	params.Add(pageParameter, fmt.Sprintf("%d", pageNumber))
+	params.Add(omdbConstants.apiKeyParameter, os.apiKey)
+	params.Add(omdbConstants.searchParameter, query)
+	params.Add(omdbConstants.pageParameter, fmt.Sprintf("%d", pageNumber))
 	endpoint.RawQuery = params.Encode()
 
 	// Create the request
