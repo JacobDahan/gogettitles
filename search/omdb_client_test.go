@@ -31,6 +31,16 @@ func TestOmdbSearcher_Search_InvalidMaxResults(t *testing.T) {
 	}
 }
 
+func TestOmdbSearcher_Search_ContextExpired(t *testing.T) {
+	searcher := search.NewOmdbSearcher(testAPIKey, http.DefaultClient)
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	_, err := searcher.Search(ctx, "Matrix", 5)
+	if err == nil {
+		t.Fatal("expected error for expired context")
+	}
+}
+
 func TestOmdbSearcher_Search_Success(t *testing.T) {
 	defer gock.Off() // Flush pending mocks after test execution
 

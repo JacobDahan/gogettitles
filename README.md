@@ -12,6 +12,8 @@ A minimal library for implementing auto-complete of TV and movie title search.
 
 🔜 Implements multiple movie database clients and provides an extensible interface for bespoke implementations.
 
+✅ Supports [contexts](https://pkg.go.dev/context).
+
 ✅ Thoroughly tested.
 
 ## Getting Started
