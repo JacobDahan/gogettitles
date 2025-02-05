@@ -1,6 +1,6 @@
 module github.com/jdahan/gogettitles
 
-go 1.23.4
+go 1.23
 
 require (
 	github.com/h2non/gock v1.2.0
