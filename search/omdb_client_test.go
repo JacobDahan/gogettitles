@@ -4,16 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"os"
 	"strings"
 	"testing"
 
 	"github.com/h2non/gock"
 	"github.com/jdahan/gogettitles/search"
-)
-
-const (
-	testAPIKey = "testkey"
 )
 
 func TestNewOmdbSearcher(t *testing.T) {
@@ -241,8 +236,4 @@ func TestOmdbSearcher_Search_ErrorResponse(t *testing.T) {
 	if err == nil || !strings.Contains(err.Error(), "Server error") {
 		t.Errorf("expected error containing 'Server error', got %v", err)
 	}
-}
-
-func loadMockResponse(file string) ([]byte, error) {
-	return os.ReadFile("testdata/" + file)
 }

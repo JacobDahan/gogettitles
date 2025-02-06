@@ -12,17 +12,19 @@ import (
 type ResultType string
 
 const (
-	Movie  ResultType = "movie"
-	Series ResultType = "series"
+	Movie   ResultType = "movie"
+	Series  ResultType = "series"
+	Episode ResultType = "episode"
 )
 
 // A SearchResult represents a single entity returned by the search service.
 type SearchResult struct {
-	Title     string
-	Year      string
-	ImdbID    string
-	PosterURL string
-	Type      ResultType
+	Title      string
+	Year       string
+	ImdbID     string
+	ProviderId string
+	PosterURL  string
+	Type       ResultType
 }
 
 // A Searcher is a service that can search for movies, series, and episodes by title, and return zero or more matching results.

@@ -1,0 +1,118 @@
+{
+    "page": 1,
+    "results": [
+      {
+        "backdrop_path": "/4qCqAdHcNKeAHcK8tJ8wNJZa9cx.jpg",
+        "id": 11,
+        "title": "Star Wars",
+        "original_title": "Star Wars",
+        "overview": "Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire.",
+        "poster_path": "/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
+        "media_type": "movie",
+        "adult": false,
+        "original_language": "en",
+        "genre_ids": [
+          12,
+          28,
+          878
+        ],
+        "popularity": 89.351,
+        "release_date": "1977-05-25",
+        "video": false,
+        "vote_average": 8.203,
+        "vote_count": 20846
+      },
+      {
+        "backdrop_path": "/6E0hbesJfpekAqL2AeHYukkHcbD.jpg",
+        "id": 202879,
+        "name": "Star Wars: Skeleton Crew",
+        "original_name": "Star Wars: Skeleton Crew",
+        "overview": "Four ordinary kids search for their home planet after getting lost in the Star Wars galaxy.",
+        "poster_path": "/srQbJhLRKoAwRrNN5ga7webPHbC.jpg",
+        "media_type": "tv",
+        "adult": false,
+        "original_language": "en",
+        "genre_ids": [
+          10759,
+          10765
+        ],
+        "popularity": 188.241,
+        "first_air_date": "2024-12-02",
+        "vote_average": 7.111,
+        "vote_count": 229,
+        "origin_country": [
+          "US"
+        ]
+      },
+      {
+        "backdrop_path": "/m6eRgkR1KC6Mr6gKx6gKCzSn6vD.jpg",
+        "id": 4194,
+        "name": "Star Wars: The Clone Wars",
+        "original_name": "Star Wars: The Clone Wars",
+        "overview": "Yoda, Obi-Wan Kenobi, Anakin Skywalker, Mace Windu and other Jedi Knights lead the Grand Army of the Republic against the droid army of the Separatists.",
+        "poster_path": "/e1nWfnnCVqxS2LeTO3dwGyAsG2V.jpg",
+        "media_type": "tv",
+        "adult": false,
+        "original_language": "en",
+        "genre_ids": [
+          10759,
+          10765
+        ],
+        "popularity": 201.356,
+        "first_air_date": "2008-10-03",
+        "vote_average": 8.462,
+        "vote_count": 2061,
+        "origin_country": [
+          "US"
+        ]
+      },
+      {
+        "backdrop_path": "/8BNjxMJMFp0BgqMh4PyuwZMXxh1.jpg",
+        "id": 60554,
+        "name": "Star Wars Rebels",
+        "original_name": "Star Wars Rebels",
+        "overview": "Set between the events of Star Wars: Episodes III and IV, the story unfolds during a dark time when the evil Galactic Empire is tightening its grip of power on the galaxy. Imperial forces have occupied a remote planet and are ruining the lives of its people. The motley but clever crew of the starship Ghost — cowboy Jedi Kanan, ace pilot Hera, street-smart teenager Ezra, the “muscle” Zeb, warrior firebrand Sabine, and cantankerous old astromech droid Chopper — is among a select few who are brave enough to stand against the Empire. Together, they will face threatening new villains, encounter colorful adversaries, embark on thrilling adventures, and become heroes with the power to ignite a rebellion.",
+        "poster_path": "/jmgR8330sKEJehr27rQ3bODnrlP.jpg",
+        "media_type": "tv",
+        "adult": false,
+        "original_language": "en",
+        "genre_ids": [
+          10759,
+          16,
+          10765
+        ],
+        "popularity": 103.702,
+        "first_air_date": "2014-10-13",
+        "vote_average": 7.7,
+        "vote_count": 865,
+        "origin_country": [
+          "US"
+        ]
+      },
+      {
+        "backdrop_path": "/oxv9a3dJvs4aAi5ctB4pQSdTji3.jpg",
+        "id": 83867,
+        "name": "Star Wars: Andor",
+        "original_name": "Star Wars: Andor",
+        "overview": "In an era filled with danger, deception and intrigue, Cassian Andor will discover the difference he can make in the struggle against the tyrannical Galactic Empire. He embarks on a path that is destined to turn him into a rebel hero.",
+        "poster_path": "/59SVNwLfoMnZPPB6ukW6dlPxAdI.jpg",
+        "media_type": "tv",
+        "adult": false,
+        "original_language": "en",
+        "genre_ids": [
+          10765,
+          10759,
+          18
+        ],
+        "popularity": 61.307,
+        "first_air_date": "2022-09-21",
+        "vote_average": 8.222,
+        "vote_count": 1288,
+        "origin_country": [
+          "US"
+        ]
+      }
+    ],
+    "total_pages": 2,
+    "total_results": 5
+  }
