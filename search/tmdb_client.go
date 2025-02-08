@@ -136,13 +136,14 @@ func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 	// Define the response structure
 	var tmdbResponse struct {
 		Result []struct {
-			Title     string `json:"title"`
-			Name      string `json:"name"`
-			Year      string `json:"first_air_date"`
-			ImdbID    string `json:"imdb_id"`
-			PosterURL string `json:"poster_path"`
-			Type      string `json:"media_type"`
-			TmdbId    int    `json:"id"`
+			Title       string `json:"title"`
+			Name        string `json:"name"`
+			AirDate     string `json:"first_air_date"`
+			ReleaseDate string `json:"release_date"`
+			ImdbID      string `json:"imdb_id"`
+			PosterURL   string `json:"poster_path"`
+			Type        string `json:"media_type"`
+			TmdbId      int    `json:"id"`
 		} `json:"results"`
 		TotalResults  int    `json:"total_results"`
 		TotalPages    int    `json:"total_pages"`
@@ -182,6 +183,13 @@ func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 			continue
 		}
 
+		var resultYear string
+		if result.ReleaseDate != "" {
+			resultYear = result.ReleaseDate[:4]
+		} else {
+			resultYear = result.AirDate[:4]
+		}
+
 		maxResults--
 		if maxResults < 0 {
 			break
@@ -189,7 +197,7 @@ func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 
 		*results = append(*results, SearchResult{
 			Title:      resultTitle,
-			Year:       result.Year,
+			Year:       resultYear,
 			ImdbID:     result.ImdbID,
 			PosterURL:  result.PosterURL,
 			Type:       resultType,
