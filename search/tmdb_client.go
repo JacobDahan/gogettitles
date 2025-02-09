@@ -56,7 +56,7 @@ func NewTmdbSearcher(apiKey string, httpClient *http.Client) *TmdbSearcher {
 //   - error: An error if the search operation fails.
 func (os *TmdbSearcher) Search(ctx context.Context, query string, maxResults int) ([]SearchResult, error) {
 	if maxResults <= 0 {
-		return nil, fmt.Errorf("invalid value for maxResults: %d", maxResults)
+		return nil, NewInvalidMaxResultsError()
 	}
 
 	results := make([]SearchResult, 0, maxResults)
@@ -93,10 +93,6 @@ func (os *TmdbSearcher) Search(ctx context.Context, query string, maxResults int
 //   - bool: A boolean indicating whether there are more pages to retrieve.
 //   - error: An error if the search request failed or the response could not be processed.
 func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults int, pageNumber int, results *[]SearchResult) (bool, error) {
-	if maxResults <= 0 {
-		return false, fmt.Errorf("invalid value for maxResults: %d", maxResults)
-	}
-
 	// Build the URL for the search request
 	u, err := url.JoinPath(tmdbConstants.baseURL, tmdbConstants.apiVersion, tmdbConstants.searchEndpoint, tmdbConstants.searchType)
 	if err != nil {
@@ -128,7 +124,7 @@ func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 	// Perform the request
 	resp, err := os.client.Do(req)
 	if err != nil {
-		return false, err
+		return false, NewSearchProviderError(err.Error())
 	}
 
 	defer resp.Body.Close()
@@ -153,12 +149,12 @@ func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 
 	// Decode the JSON response
 	if err := json.NewDecoder(resp.Body).Decode(&tmdbResponse); err != nil {
-		return false, err
+		return false, NewResultParsingError(err.Error())
 	}
 
 	// Check for a successful response
 	if resp.StatusCode != http.StatusOK || (!tmdbResponse.Success && tmdbResponse.StatusMessage != "") {
-		return false, fmt.Errorf("search request failed: %s", tmdbResponse.StatusMessage)
+		return false, NewSearchProviderError(fmt.Sprintf("search request failed: %s", tmdbResponse.StatusMessage))
 	}
 
 	log.Printf("Found %d results for query \"%s\" on page %d\n", len(tmdbResponse.Result), query, pageNumber)
@@ -186,8 +182,10 @@ func (os *TmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 		var resultYear string
 		if result.ReleaseDate != "" {
 			resultYear = result.ReleaseDate[:4]
-		} else {
+		} else if result.AirDate != "" {
 			resultYear = result.AirDate[:4]
+		} else {
+			log.Println("No release date found for result:", result)
 		}
 
 		maxResults--

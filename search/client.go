@@ -42,3 +42,46 @@ type Searcher interface {
 	//   - error: An error if the search operation fails.
 	Search(ctx context.Context, query string, maxResults int) ([]SearchResult, error)
 }
+
+// InvalidMaxResultsError is an error type that is returned when the maxResults parameter is invalid.
+type InvalidMaxResultsError struct{}
+
+// NewInvalidMaxResultsError creates a new InvalidMaxResultsError.
+func NewInvalidMaxResultsError() *InvalidMaxResultsError {
+	return &InvalidMaxResultsError{}
+}
+
+// Error returns the default error message associated with the InvalidMaxResultsError.
+func (e *InvalidMaxResultsError) Error() string {
+	return "maxResults must be greater than zero"
+}
+
+// SearchProviderError is an error type that is returned when the search provider encounters an error.
+type SearchProviderError struct {
+	errorMessage string
+}
+
+// NewSearchProviderError creates a new SearchProviderError with the specified error message.
+func NewSearchProviderError(errorMessage string) *SearchProviderError {
+	return &SearchProviderError{errorMessage: errorMessage}
+}
+
+// Error returns the error message associated with the SearchProviderError.
+func (e *SearchProviderError) Error() string {
+	return e.errorMessage
+}
+
+// ResultParsingError is an error type that is returned when there is an error parsing the search results.
+type ResultParsingError struct {
+	reason string
+}
+
+// NewResultParsingError creates a new ResultParsingError with the specified reason.
+func NewResultParsingError(reason string) *ResultParsingError {
+	return &ResultParsingError{reason: reason}
+}
+
+// Error returns the reason associated with the ResultParsingError.
+func (e *ResultParsingError) Error() string {
+	return e.reason
+}

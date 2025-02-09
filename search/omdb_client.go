@@ -10,6 +10,7 @@ import (
 	"strconv"
 )
 
+// OmdbConstants holds the constants used for OMDB API requests.
 type OmdbConstants struct {
 	baseURL         string
 	apiKeyParameter string
@@ -33,6 +34,13 @@ type OmdbSearcher struct {
 }
 
 // NewOmdbSearcher creates a new instance of OmdbSearcher with the specified API key and client.
+//
+// Parameters:
+//   - apiKey: The OMDB API key to use for searching.
+//   - httpClient: The HTTP client to use for making requests.
+//
+// Returns:
+//   - *OmdbSearcher: A new instance of OmdbSearcher.
 func NewOmdbSearcher(apiKey string, httpClient *http.Client) *OmdbSearcher {
 	return &OmdbSearcher{
 		apiKey: apiKey,
@@ -53,7 +61,7 @@ func NewOmdbSearcher(apiKey string, httpClient *http.Client) *OmdbSearcher {
 //   - error: An error if the search operation fails.
 func (os *OmdbSearcher) Search(ctx context.Context, query string, maxResults int) ([]SearchResult, error) {
 	if maxResults <= 0 {
-		return nil, fmt.Errorf("invalid value for maxResults: %d", maxResults)
+		return nil, NewInvalidMaxResultsError()
 	}
 
 	results := make([]SearchResult, 0, maxResults)
@@ -90,10 +98,6 @@ func (os *OmdbSearcher) Search(ctx context.Context, query string, maxResults int
 //   - bool: A boolean indicating whether there are more pages to retrieve.
 //   - error: An error if the search request failed or the response could not be processed.
 func (os *OmdbSearcher) searchPage(ctx context.Context, query string, maxResults int, pageNumber int, results *[]SearchResult) (bool, error) {
-	if maxResults <= 0 {
-		return false, fmt.Errorf("invalid value for maxResults: %d", maxResults)
-	}
-
 	// Build the URL for the search request
 	endpoint, err := url.Parse(omdbConstants.baseURL)
 	if err != nil {
@@ -115,7 +119,7 @@ func (os *OmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 	// Perform the request
 	resp, err := os.client.Do(req)
 	if err != nil {
-		return false, err
+		return false, NewSearchProviderError(err.Error())
 	}
 
 	defer resp.Body.Close()
@@ -135,7 +139,7 @@ func (os *OmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 
 	// Decode the JSON response
 	if err := json.NewDecoder(resp.Body).Decode(&omdbResponse); err != nil {
-		return false, err
+		return false, NewResultParsingError(err.Error())
 	}
 
 	log.Printf("Found %d results for query \"%s\" on page %d\n", len(omdbResponse.Result), query, pageNumber)
@@ -147,7 +151,7 @@ func (os *OmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 
 	// Check for other errors in the response (OMDB API returns an error field if the request fails)
 	if omdbResponse.Error != "" {
-		return false, fmt.Errorf("OMDB API request failed with error: %s", omdbResponse.Error)
+		return false, NewSearchProviderError(fmt.Sprintf("OMDB API request failed with error: %s", omdbResponse.Error))
 	}
 
 	// Convert the response to the SearchResult format
@@ -170,7 +174,7 @@ func (os *OmdbSearcher) searchPage(ctx context.Context, query string, maxResults
 	// Check if there are more pages to retrieve
 	totalResults, err := strconv.Atoi(omdbResponse.TotalResults)
 	if err != nil {
-		return false, fmt.Errorf("failed to convert totalResults to int: %v", err)
+		return false, NewResultParsingError(fmt.Sprintf("failed to convert totalResults to int: %v", err))
 	}
 
 	if len(*results) < totalResults && maxResults > 0 {
